@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" width="100%" height="100%">
+  <!-- Icon container -->
+  <g transform="translate(85, 15)">
+    <!-- Blue outer arch (Leg 1 & Leg 4) -->
+    <path d="M 10 110 L 10 55 A 45 45 0 0 1 100 55 L 100 110 L 84 110 L 84 55 A 29 29 0 0 0 26 55 L 26 110 Z" fill="#1b65b5" />
+    
+    <!-- Inner left bar (Leg 2) -->
+    <rect x="36" y="55" width="14" height="55" rx="2" fill="#1b65b5" />
+    
+    <!-- Central light blue 'i' (Leg 3) -->
+    <rect x="60" y="70" width="14" height="40" rx="2" fill="#38b6e6" />
+    <circle cx="67" cy="53" r="7" fill="#38b6e6" />
+  </g>
+  
+  <!-- Text: IMPEXZON | 因 佩 克 斯 宗 -->
+  <text x="140" y="165" font-family="'Raleway', 'Montserrat', sans-serif" font-weight="800" font-size="17" fill="#1b65b5" text-anchor="middle" letter-spacing="1">IMPEXZON <tspan fill="#777" font-weight="300">|</tspan> 因 佩 克 斯 宗</text>
+</svg>

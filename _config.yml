@@ -1,0 +1,50 @@
+title: "Impexzon"
+email: "support@impexzon.com"
+description: "Global sourcing and export consulting company helping buyers and sellers connect internationally."
+
+url: "" #github url
+baseurl: ""
+
+# Global boutique contact settings
+whatsapp_number: ""
+telegram_username: ""
+
+theme: null
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+collections:
+  products:
+    output: true
+    permalink: /products/:name/
+
+defaults:
+  - scope:
+      path: "_products"
+      type: "products"
+    values:
+      layout: "product-details"
+      sitemap: true
+
+  - scope:
+      path: ""
+    values:
+      sitemap: true
+
+  - scope:
+      path: "admin"
+    values:
+      sitemap: false
+
+include:
+  - admin
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache/
+  - .jekyll-cache/

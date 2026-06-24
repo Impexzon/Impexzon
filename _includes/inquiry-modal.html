@@ -1,0 +1,274 @@
+<style>
+    /* MODAL STYLES */
+    .inquiry-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 100002; /* Higher than sticky nav and other overlays */
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .inquiry-modal-overlay.show {
+        display: flex;
+        opacity: 1;
+    }
+
+    .inquiry-modal {
+        background-color: #fff;
+        padding: 30px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        border-radius: 4px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-20px);
+        transition: transform 0.3s ease;
+    }
+
+    .inquiry-modal-overlay.show .inquiry-modal {
+        transform: translateY(0);
+    }
+
+    .inquiry-modal h3 {
+        margin-top: 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #111;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+        line-height: 1;
+    }
+
+    .close-modal:hover {
+        color: #111;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        color: #111;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #e9e9e9;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        border-radius: 2px;
+        background-color: #fff;
+    }
+
+    .form-group input[readonly] {
+        background-color: #f9f9f9;
+        color: #666;
+    }
+
+    .form-submit-btn {
+        width: 100%;
+        background-color: #111;
+        color: #fff;
+        border: none;
+        padding: 14px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .form-submit-btn:hover {
+        background-color: #666;
+    }
+
+    .telegram-submit-btn {
+        background-color: #0088cc !important;
+    }
+
+    .telegram-submit-btn:hover {
+        background-color: #006699 !important;
+    }
+
+    .whatsapp-submit-btn {
+        background-color: #25d366 !important;
+    }
+
+    .whatsapp-submit-btn:hover {
+        background-color: #1ebe57 !important;
+    }
+</style>
+
+<div class="inquiry-modal-overlay" id="inquiryModal">
+    <div class="inquiry-modal">
+        <span class="close-modal" onclick="closeInquiryModal()">&times;</span>
+        <h3>Inquire About Product</h3>
+        <form id="inquiryForm" onsubmit="submitInquiry(event)">
+            <div class="form-group">
+                <label for="inquireProduct">Product Name</label>
+                <input type="text" id="inquireProduct" value="" readonly>
+            </div>
+            <div class="form-group">
+                <label for="inquirePrice">Price</label>
+                <input type="text" id="inquirePrice" value="" readonly>
+            </div>
+            <div class="form-group">
+                <label for="inquireName">Name</label>
+                <input type="text" id="inquireName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="inquireEmail">Email</label>
+                <input type="email" id="inquireEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="inquirePhone">Mobile Number</label>
+                <input type="tel" id="inquirePhone" required placeholder="Enter your mobile number">
+            </div>
+            <div class="form-group">
+                <label for="inquireQuantity">Quantity</label>
+                <input type="number" id="inquireQuantity" value="1" min="1" required oninput="updateSum()">
+            </div>
+            <div class="form-group">
+                <label for="inquireSum">Total Sum</label>
+                <input type="text" id="inquireSum" value="" readonly>
+            </div>
+            <input type="hidden" id="inquiryChannel" value="telegram">
+            <div class="inquiry-submit-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px;">
+                <button type="submit" onclick="setInquiryChannel('telegram')" class="form-submit-btn telegram-submit-btn" id="inquirySubmitTelegramBtn" style="margin-top: 0; padding: 12px 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="flex-shrink: 0;"><path d="M12 .587c-6.3 0-11.4 5.1-11.4 11.4s5.1 11.4 11.4 11.4 11.4-5.1 11.4-11.4-5.1-11.4-11.4-11.4zm5.55 7.848c-.17 1.838-1.41 9.14-2.04 12.522-.27 1.432-1.04 1.432-1.57.973-.83-.722-2.18-1.89-3.21-2.77-.4-.34-.73-.66-.34-1.2.1-.14 1.76-2.427 3.51-4.832.19-.26.24-.46.1-.59-.14-.13-.39-.08-.55-.02-1.57 1.05-3.3 2.21-5.18 3.47-.4.27-.81.42-1.12.41-.35-.01-1.03-.2-1.53-.36-.62-.2-1.11-.31-1.07-.66.02-.18.27-.37.75-.56 2.94-1.28 7.37-3.21 9.77-4.25 1.13-.49 1.96-.58 2.37-.58.11 0 .36.02.53.15.17.13.21.36.19.64z"/></svg>
+                    <span>Telegram</span>
+                </button>
+                <button type="submit" onclick="setInquiryChannel('whatsapp')" class="form-submit-btn whatsapp-submit-btn" id="inquirySubmitWhatsappBtn" style="margin-top: 0; padding: 12px 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="flex-shrink: 0;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.457-4.425-9.893-9.889-9.893-5.457 0-9.89 4.436-9.89 9.893 0 2.23.635 4.397 1.833 6.136l-.994 3.634 3.73-.977zm11.587-7.714c-.307-.153-1.82-.9-2.1-.1-.28.1-.482.9-.59 1.03-.108.13-.217.153-.524.001-.307-.152-1.294-.477-2.464-1.521-.91-.811-1.524-1.812-1.703-2.118-.179-.306-.019-.471.134-.622.137-.137.307-.357.46-.536.153-.18.205-.306.307-.51.102-.204.051-.383-.025-.536-.077-.153-.692-1.67-.949-2.285-.25-.602-.525-.519-.72-.53-.185-.01-.397-.012-.61-.012-.213 0-.56.08-1.01.57-.45.49-1.72 1.68-1.72 4.1 0 2.425 1.763 4.77 2.01 5.1.248.33 3.47 5.3 8.408 7.436 1.175.508 2.09.81 2.802 1.037 1.18.375 2.253.322 3.102.195.946-.142 2.823-1.154 3.218-2.268.396-1.114.396-2.07.278-2.269-.118-.198-.426-.307-.732-.46z"/></svg>
+                    <span>WhatsApp</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let currentProductPrice = 0;
+
+    function updateSum() {
+        const quantity = parseInt(document.getElementById('inquireQuantity').value) || 1;
+        const total = currentProductPrice * quantity;
+        document.getElementById('inquireSum').value = "₹" + total;
+    }
+
+    function openInquiryModal(name, price) {
+        currentProductPrice = Number(String(price).replace(/[^\d.]/g, '')) || 0;
+        
+        document.getElementById('inquireProduct').value = name;
+        document.getElementById('inquirePrice').value = "₹" + currentProductPrice;
+        document.getElementById('inquireQuantity').value = 1;
+        document.getElementById('inquireSum').value = "₹" + currentProductPrice;
+
+        const auth = window.firebaseAuthInstance;
+        if (!auth) {
+            alert("Auth system is still loading. Please try again in a moment.");
+            return;
+        }
+        if (auth.currentUser) {
+            document.getElementById('inquiryModal').classList.add('show');
+        } else {
+            if (typeof showAuthAlertModal === 'function') {
+                showAuthAlertModal();
+            } else {
+                alert("Please log in to inquire about this product.");
+            }
+        }
+    }
+
+    function closeInquiryModal() {
+        document.getElementById('inquiryModal').classList.remove('show');
+    }
+
+    function setInquiryChannel(channel) {
+        document.getElementById('inquiryChannel').value = channel;
+    }
+
+    function submitInquiry(event) {
+        event.preventDefault();
+
+        const channel = document.getElementById('inquiryChannel').value;
+        const submitBtnTelegram = document.getElementById('inquirySubmitTelegramBtn');
+        const submitBtnWhatsapp = document.getElementById('inquirySubmitWhatsappBtn');
+        
+        // Save original content to restore later
+        const originalTelegramContent = submitBtnTelegram.innerHTML;
+        const originalWhatsappContent = submitBtnWhatsapp.innerHTML;
+
+        // Disable both buttons and show sending status
+        if (channel === 'telegram') {
+            submitBtnTelegram.innerText = "Sending...";
+        } else {
+            submitBtnWhatsapp.innerText = "Sending...";
+        }
+        submitBtnTelegram.disabled = true;
+        submitBtnWhatsapp.disabled = true;
+
+        const product = document.getElementById('inquireProduct').value;
+        const price = document.getElementById('inquirePrice').value;
+        const name = document.getElementById('inquireName').value || "Not provided";
+        const email = document.getElementById('inquireEmail').value || "Not provided";
+        const phone = document.getElementById('inquirePhone').value;
+        const quantity = document.getElementById('inquireQuantity').value;
+        const totalSum = document.getElementById('inquireSum').value;
+
+        const text = `🛒 *New Product Inquiry*\n\n` +
+            `*Product:* ${product}\n` +
+            `*Price:* ${price}\n` +
+            `*Name:* ${name}\n` +
+            `*Email:* ${email}\n` +
+            `*Phone:* ${phone}\n` +
+            `*Quantity:* ${quantity}\n` +
+            `*Total Sum:* ${totalSum}`;
+
+        // Encode the text for the URL
+        const encodedText = encodeURIComponent(text);
+
+        if (channel === 'telegram') {
+            const adminTelegramUsername = "{{ site.telegram_username | default: 'Rinshad_py' }}";
+            const telegramUrl = `https://t.me/${adminTelegramUsername}?text=${encodedText}`;
+            window.open(telegramUrl, '_blank');
+        } else if (channel === 'whatsapp') {
+            const adminWhatsAppNumber = "{{ site.whatsapp_number | default: '917684567345' }}"; 
+            const whatsappUrl = `https://wa.me/${adminWhatsAppNumber}?text=${encodedText}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Close the modal and reset form
+        closeInquiryModal();
+        document.getElementById('inquiryForm').reset();
+
+        // Restore button states
+        submitBtnTelegram.innerHTML = originalTelegramContent;
+        submitBtnWhatsapp.innerHTML = originalWhatsappContent;
+        submitBtnTelegram.disabled = false;
+        submitBtnWhatsapp.disabled = false;
+    }
+</script>

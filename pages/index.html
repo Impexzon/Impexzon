@@ -1,0 +1,641 @@
+---
+layout: home
+title: Home
+seo_title: Impexzon | Global Sourcing & Export Consulting
+description: Global sourcing and export consulting company helping international distributors, importers, wholesalers, and retailers discover high-quality Indian products and successfully enter new markets.
+permalink: /
+---
+
+<style>
+/* ------------------------------------------------------------------- */
+/* IMPEXZON MODERN GLOBAL TRADING BRANDING */
+/* ------------------------------------------------------------------- */
+
+.impexzon-home {
+    font-family: 'Montserrat', sans-serif;
+    color: #1a1a1a;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+.container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* 1. HERO SECTION */
+.hero-brand-section {
+    text-align: center;
+    padding: 80px 0 40px; /* offset for 50px header */
+}
+
+.brand-hero-logo {
+    width: 260px; /* Larger logo size */
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto 30px;
+    display: block;
+}
+
+.hero-beige-card {
+    background-color: #FAF4F0;
+    padding: 80px 40px;
+    border-radius: 4px;
+    margin-bottom: 60px;
+}
+
+.hero-beige-card .buy-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 5px;
+    color: #0c0806;
+    line-height: 1.1;
+}
+
+.hero-beige-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 20px;
+    color: #0c0806;
+    line-height: 1.1;
+}
+
+.hero-beige-card .subtitle-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 35px;
+}
+
+.btn-start-now {
+    display: inline-block;
+    background-color: #0c0806;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.btn-start-now:hover {
+    background-color: #2b1f1a;
+}
+
+/* 2. ABOUT US SECTION */
+.about-brand-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.about-brand-section h2.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 auto 30px;
+    max-width: 600px;
+    color: #1a1a1a;
+}
+
+.about-story-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.about-brand-section p.brand-description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    text-align: justify;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+/* 3. CONTACT US SECTION */
+.contact-brand-section {
+    padding: 60px 0;
+}
+
+.contact-brand-section h2.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* 3. CONTACT SECTION - DIRECT METHODS */
+.contact-grid-custom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 40px auto 20px;
+    max-width: 800px;
+}
+
+.contact-card-custom {
+    background-color: #FAF4F0;
+    border-radius: 6px;
+    padding: 35px 24px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contact-card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(12,8,6,0.08);
+}
+
+.contact-card-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.contact-card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.contact-card-custom.whatsapp .contact-card-icon svg {
+    fill: #25d366;
+}
+
+.contact-card-custom.telegram .contact-card-icon svg {
+    fill: #0088cc;
+}
+
+.contact-card-custom.email .contact-card-icon svg {
+    stroke: #0c0806;
+}
+
+.contact-card-custom h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #0c0806;
+}
+
+.contact-card-custom p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.btn-contact-channel {
+    display: inline-block;
+    width: 100%;
+    background-color: #0c0806;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: 2px;
+    transition: background-color 0.25s;
+}
+
+.btn-contact-channel:hover {
+    background-color: #2b1f1a;
+}
+
+@media (max-width: 768px) {
+    .contact-grid-custom {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* 4. ADDRESS SECTION */
+.address-brand-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.recaptcha-notice {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.recaptcha-notice a {
+    color: #555;
+    text-decoration: underline;
+}
+
+.address-brand-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #1a1a1a;
+}
+
+.address-brand-section p.address-intro {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: #444;
+    max-width: 650px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+.brand-name-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.brand-address-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* 5. HOURS SECTION */
+.hours-brand-section {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.hours-brand-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hours-dropdown {
+    max-width: 380px;
+    margin: 0 auto 30px;
+    position: relative;
+    text-align: left;
+}
+
+.hours-toggle {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s;
+}
+
+.hours-toggle:hover {
+    border-color: #888;
+}
+
+.hours-list {
+    display: none;
+    border: 1px solid #dcdcdc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background: #ffffff;
+    padding: 15px 20px;
+}
+
+.hours-list.active {
+    display: block;
+}
+
+.hour-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #555;
+    padding: 8px 0;
+    border-bottom: 1px dashed #efefef;
+}
+
+.hour-line:last-child {
+    border-bottom: none;
+}
+
+.hour-line span:first-child {
+    font-weight: 500;
+}
+
+/* 6. MAP SECTION */
+.map-brand-section {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.map-brand-section iframe {
+    width: 100%;
+    height: 450px;
+    border: none;
+    display: block;
+}
+
+/* Custom premium chat bubble to match the brand */
+.premium-chat-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #0c0806;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s;
+}
+
+.premium-chat-float:hover {
+    transform: scale(1.05);
+    background-color: #2b1f1a;
+}
+
+.premium-chat-float svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+}
+
+/* MOBILE ADAPTABILITY */
+@media(max-width: 768px) {
+    .hero-brand-section {
+        padding: 50px 0 20px;
+    }
+    .hero-beige-card {
+        padding: 50px 20px;
+        margin-bottom: 40px;
+    }
+    .hero-beige-card .buy-tag {
+        font-size: 2.2rem;
+    }
+    .hero-beige-card h2 {
+        font-size: 2.2rem;
+    }
+    .hero-beige-card .subtitle-tag {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    .btn-start-now {
+        font-size: 0.78rem;
+        padding: 10px 20px;
+        letter-spacing: 1px;
+    }
+    .about-brand-section h2.main-title,
+    .contact-brand-section h2.main-title,
+    .address-brand-section h2,
+    .subscribe-brand-section h2 {
+        font-size: 1.8rem;
+    }
+    .brand-address-text {
+        font-size: 0.95rem;
+    }
+    .map-brand-section iframe {
+        height: 300px;
+    }
+}
+
+/* Premium wide-screen structural updates for screens wider than 1024px (1440px friendly) */
+@media (min-width: 1025px) {
+    .container-narrow {
+        max-width: 1200px !important; /* Allow layout to expand and avoid over-spacing */
+    }
+    
+    .contact-grid-custom {
+        max-width: 1100px !important; /* Make contact cards larger and beautifully spaced */
+        gap: 32px !important; /* Premium wide gap */
+    }
+    
+    .about-story-image {
+        max-height: 500px !important; /* Taller image banner to match the wide layout */
+    }
+}
+</style>
+
+<div class="impexzon-home">
+    <div class="container-narrow">
+        
+        <!-- 1. HERO SECTION -->
+        <section class="hero-brand-section">
+            <img src="/assets/images/logo.svg" alt="Impexzon Logo" class="brand-hero-logo" onerror="this.style.display='none'">
+            
+            <div class="hero-beige-card">
+                <div class="buy-tag">Buy</div>
+                <h2>WORLD CLASS</h2>
+                <div class="subtitle-tag">Products in Cambodia</div>
+                <a href="#contact" class="btn-start-now">Start Your Business Now</a>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT US SECTION -->
+        <section id="about" class="about-brand-section">
+            <div class="section-label">About Us</div>
+            <h2 class="main-title">International Market Entry</h2>
+            
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Impexzon Teamwork Hands" 
+                 class="about-story-image"
+                 loading="lazy"
+                 decoding="async">
+                 
+            <p class="brand-description">
+                Impexzon is a global sourcing and export consulting company that helps international distributors, importers, wholesalers, and retailers discover high-quality Indian products and successfully enter new markets. We connect global buyers with trusted Indian manufacturers and provide end-to-end export support.
+            </p>
+        </section>
+
+        <!-- 3. CONTACT US SECTION -->
+        <section id="contact" class="contact-brand-section">
+            <div class="section-label" style="text-align: center;">Contact Us</div>
+            <h2 class="main-title">Start Today</h2>
+            
+            <div class="contact-grid-custom">
+                <!-- 1. WhatsApp Card -->
+                <div class="contact-card-custom whatsapp">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.18-1.24-6.171-3.495-8.428"/>
+                        </svg>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Start a live conversation with our sourcing agents for immediate support.</p>
+                    <a href="https://wa.me/{{ site.whatsapp_number }}" target="_blank" class="btn-contact-channel">Chat Now</a>
+                </div>
+
+                <!-- 2. Telegram Card -->
+                <div class="contact-card-custom telegram">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 .587c-6.3 0-11.4 5.1-11.4 11.4s5.1 11.4 11.4 11.4 11.4-5.1 11.4-11.4-5.1-11.4-11.4-11.4zm5.55 7.848c-.17 1.838-1.41 9.14-2.04 12.522-.27 1.432-1.04 1.432-1.57.973-.83-.722-2.18-1.89-3.21-2.77-.4-.34-.73-.66-.34-1.2.1-.14 1.76-2.427 3.51-4.832.19-.26.24-.46.1-.59-.14-.13-.39-.08-.55-.02-1.57 1.05-3.3 2.21-5.18 3.47-.4.27-.81.42-1.12.41-.35-.01-1.03-.2-1.53-.36-.62-.2-1.11-.31-1.07-.66.02-.18.27-.37.75-.56 2.94-1.28 7.37-3.21 9.77-4.25 1.13-.49 1.96-.58 2.37-.58.11 0 .36.02.53.15.17.13.21.36.19.64z"/>
+                        </svg>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Connect with our corporate export advisors and network partners.</p>
+                    <a href="https://t.me/{{ site.telegram_username }}" target="_blank" class="btn-contact-channel">Connect Advisors</a>
+                </div>
+
+                <!-- 3. Email Card -->
+                <div class="contact-card-custom email">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3>Email</h3>
+                    <p>Send your sourcing requirements and project proposals to our inbox.</p>
+                    <a href="mailto:{{ site.email }}" class="btn-contact-channel">Email Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ADDRESS SECTION -->
+        <section class="address-brand-section">
+            <div class="recaptcha-notice">
+                This site is protected by reCAPTCHA and the Google 
+                <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and 
+                <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
+            </div>
+            
+            <h2>Better yet, see us in person!</h2>
+            <p class="address-intro">
+                We help importers, distributors, and retailers source high-quality products from India and successfully enter international markets. We're always happy to meet new customers!
+            </p>
+            
+            <div class="brand-name-title">Impexzon</div>
+            <p class="brand-address-text">
+                Borey Nirothchey No 03 Tangov Kandal Village Niroth quarter Chbar ompov District Phnom Penh
+            </p>
+        </section>
+
+        <!-- 5. HOURS SECTION -->
+        <section class="hours-brand-section">
+            <h2>Hours</h2>
+            
+            <div class="hours-dropdown">
+                <button class="hours-toggle" id="hoursToggle">
+                    <span>Open today 09:00 am - 05:00 pm</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="hours-list" id="hoursList">
+                    <div class="hour-line"><span>Monday</span> <span>09:00 am - 05:00 pm</span></div>
+                    <div class="hour-line"><span>Tuesday</span> <span>09:00 am - 05:00 pm</span></div>
+                    <div class="hour-line"><span>Wednesday</span> <span>09:00 am - 05:00 pm</span></div>
+                    <div class="hour-line"><span>Thursday</span> <span>09:00 am - 05:00 pm</span></div>
+                    <div class="hour-line"><span>Friday</span> <span>09:00 am - 05:00 pm</span></div>
+                    <div class="hour-line"><span>Saturday</span> <span>Closed</span></div>
+                    <div class="hour-line"><span>Sunday</span> <span>Closed</span></div>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- /container-narrow -->
+
+    <!-- 6. MAP SECTION (Full width) -->
+    <section class="map-brand-section">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3909.0286817290947!2d104.945!3d11.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109513cd7787fb9%3A0xe54d89a42adbb4b!2sChbar%20Ampov%2C%20Phnom%20Penh%2C%20Cambodia!5e0!3m2!1sen!2sus!4v1718500000000!5m2!1sen!2sus" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+
+
+</div>
+
+<!-- Premium speech bubble chat button to match screenshots -->
+<div class="premium-chat-float" onclick="window.location.href='#contact'">
+    <svg viewBox="0 0 24 24">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const hoursToggle = document.getElementById("hoursToggle");
+    const hoursList = document.getElementById("hoursList");
+    
+    if (hoursToggle && hoursList) {
+        hoursToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            hoursList.classList.toggle("active");
+            
+            // Rotate the arrow icon
+            const arrow = hoursToggle.querySelector("svg");
+            if (hoursList.classList.contains("active")) {
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                arrow.style.transform = "rotate(0deg)";
+            }
+        });
+        
+        // Close when clicking outside
+        document.addEventListener("click", () => {
+            hoursList.classList.remove("active");
+            const arrow = hoursToggle.querySelector("svg");
+            arrow.style.transform = "rotate(0deg)";
+        });
+    }
+});
+</script>
