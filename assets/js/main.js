@@ -57,29 +57,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Staggered menu item animations on open with fade & slide
+    // Staggered menu item animations disabled to prevent desynchronization/invisible option bugs.
+    // CSS transition now handles layout slide & fade smoothly and natively.
     function animateMenuOpen() {
-        // Fade in background overlay
-        navMenu.style.animation = 'fadeIn 0.4s ease-out forwards';
-        
-        navLinks.forEach((link, index) => {
+        navMenu.style.animation = 'none';
+        navLinks.forEach(link => {
             link.style.animation = 'none';
-            setTimeout(() => {
-                link.style.animation = `slideInLeft 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.08}s forwards, fadeIn 0.5s ease-out ${index * 0.08}s forwards`;
-            }, 10);
         });
     }
     
-    // Staggered menu item animations on close with fade & slide
     function animateMenuClose() {
-        navLinks.forEach((link, index) => {
-            link.style.animation = `slideOutLeft 0.5s ease-in ${index * 0.05}s forwards, fadeOut 0.3s ease-in ${index * 0.05}s forwards`;
+        navMenu.style.animation = 'none';
+        navLinks.forEach(link => {
+            link.style.animation = 'none';
         });
-        
-        // Fade out background overlay
-        setTimeout(() => {
-            navMenu.style.animation = 'fadeOut 0.3s ease-in forwards';
-        }, 150);
     }
     
     // Close mobile/tablet menu when clicking on a link with smooth exit
