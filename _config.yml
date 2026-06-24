@@ -2,8 +2,8 @@ title: "Impexzon"
 email: "support@impexzon.com"
 description: "Global sourcing and export consulting company helping buyers and sellers connect internationally."
 
-url: "" #github url
-baseurl: ""
+url: "https://impexzon.github.io"
+baseurl: "/Impexzon"
 
 # Global boutique contact settings
 whatsapp_number: ""

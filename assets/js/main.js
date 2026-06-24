@@ -248,7 +248,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.key === 'Enter') {
                 const query = drawerSearchInput.value.trim();
                 if (query) {
-                    const isProductsPage = window.location.pathname === '/products/' || window.location.pathname === '/products';
+                    const base = window.siteBaseUrl || "";
+                    const cleanPath = window.location.pathname.replace(/\/$/, "");
+                    const productsPath = `${base}/products`.replace(/\/$/, "");
+                    const isProductsPage = cleanPath === productsPath;
                     if (isProductsPage && typeof window.filterProductsByQuery === 'function') {
                         window.filterProductsByQuery(query);
                         const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?q=' + encodeURIComponent(query);
@@ -260,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (navMenu) navMenu.classList.remove('active');
                         if (hamburger) hamburger.classList.remove('active');
                     } else {
-                        window.location.href = `/products/?q=${encodeURIComponent(query)}`;
+                        window.location.href = `${base}/products/?q=${encodeURIComponent(query)}`;
                     }
                 }
             }
@@ -498,7 +501,10 @@ function doSearch() {
     const q = input.value.trim();
     if (!q) return;
     
-    const isProductsPage = window.location.pathname === '/products/' || window.location.pathname === '/products';
+    const base = window.siteBaseUrl || "";
+    const cleanPath = window.location.pathname.replace(/\/$/, "");
+    const productsPath = `${base}/products`.replace(/\/$/, "");
+    const isProductsPage = cleanPath === productsPath;
     if (isProductsPage && typeof window.filterProductsByQuery === 'function') {
         window.filterProductsByQuery(q);
         const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?q=' + encodeURIComponent(q);
@@ -510,7 +516,7 @@ function doSearch() {
             searchModal.classList.remove('active');
         }
     } else {
-        window.location.href = `/products/?q=${encodeURIComponent(q)}`;
+        window.location.href = `${base}/products/?q=${encodeURIComponent(q)}`;
     }
 }
 

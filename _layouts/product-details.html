@@ -2,7 +2,7 @@
 layout: home
 ---
 
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap');
@@ -354,8 +354,8 @@ layout: home
 
         <div class="pd-info-section">
             <p class="pd-breadcrumbs">
-                <a href="/">Home</a> /
-                <a href="/products/">Collection</a>
+                <a href="{{ '/' | relative_url }}">Home</a> /
+                <a href="{{ '/products/' | relative_url }}">Collection</a>
             </p>
 
             <h1 class="pd-title">{{ page.name }}</h1>
@@ -419,7 +419,7 @@ layout: home
             <div class="pd-action-block">
                 <button onclick="openInquiryModal('{{ page.name | escape }}', '{{ page.price }}')" class="btn-buy" style="border:none; cursor:pointer;">Inquire
                     Now</button>
-                <a href="/" style="text-decoration: none;" class="btn-whatsapp" title="Inquire via WhatsApp">Back</a>
+                <a href="{{ '/' | relative_url }}" style="text-decoration: none;" class="btn-whatsapp" title="Inquire via WhatsApp">Back</a>
             </div>
         </div>
     </div>

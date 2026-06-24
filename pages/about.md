@@ -529,7 +529,7 @@ description: Learn about Impexzon, a premier global sourcing and export consulti
   <section class="corporate-story">
     <div class="story-grid">
       <div class="story-image-col">
-        <img src="/assets/images/about_company.png" 
+        <img src="{{ '/assets/images/about_company.png' | relative_url }}" 
              alt="Impexzon retail and wholesale biscuit distribution office" 
              class="story-img"
              loading="lazy"
