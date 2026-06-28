@@ -176,16 +176,16 @@
     function updateSum() {
         const quantity = parseInt(document.getElementById('inquireQuantity').value) || 1;
         const total = currentProductPrice * quantity;
-        document.getElementById('inquireSum').value = "₹" + total;
+        document.getElementById('inquireSum').value = "$" + total;
     }
 
     function openInquiryModal(name, price) {
         currentProductPrice = Number(String(price).replace(/[^\d.]/g, '')) || 0;
         
         document.getElementById('inquireProduct').value = name;
-        document.getElementById('inquirePrice').value = "₹" + currentProductPrice;
+        document.getElementById('inquirePrice').value = "$" + currentProductPrice;
         document.getElementById('inquireQuantity').value = 1;
-        document.getElementById('inquireSum').value = "₹" + currentProductPrice;
+        document.getElementById('inquireSum').value = "$" + currentProductPrice;
 
         const auth = window.firebaseAuthInstance;
         if (!auth) {

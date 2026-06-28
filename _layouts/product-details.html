@@ -360,14 +360,12 @@ layout: home
             <h1 class="pd-title">{{ page.name }}</h1>
 
             <div class="pd-price-container">
-                <span style="color: green;" class="pd-price">₹{{ page.price }}</span>
+                <span style="color: green;" class="pd-price">${{ page.price }}</span>
                 {% if page.original_price %}
-                <span class="pd-old-price">₹{{ page.original_price }}</span>
+                <span class="pd-old-price">${{ page.original_price }}</span>
                 {% endif %}
-                {% if page.offer and page.original_price %}
-                {% assign discount = page.original_price | minus: page.price %}
-                {% assign perc = discount | times: 100.0 | divided_by: page.original_price | round %}
-                <span class="pd-offer-text">({{ perc }}% Off)</span>
+                {% if page.offer %}
+                <span class="pd-offer-text">({{ page.offer }}% Off)</span>
                 {% endif %}
             </div>
 

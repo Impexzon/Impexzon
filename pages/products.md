@@ -670,9 +670,9 @@ permalink: /products/
                         </h3>
                         <p class="product-description-text">{{ product.description | default: "Premium quality confectionery product." }}</p>
                         <div class="product-price-section">
-                            <span class="product-price">₹{{ product.price }}</span>
+                            <span class="product-price">${{ product.price }}</span>
                             {% if product.offer %}
-                            <span class="product-offer">{{ product.offer }}</span>
+                            <span class="product-offer">{{ product.offer }}% Off</span>
                             {% endif %}
                         </div>
                     </div>

@@ -361,7 +361,7 @@
         <div class="cart-drawer-footer">
             <div class="cart-total-section">
                 <span>Total Amount:</span>
-                <span id="cartDrawerSum">₹0</span>
+                <span id="cartDrawerSum">$0</span>
             </div>
             
             <div class="cart-checkout-btns">
@@ -487,10 +487,10 @@
                 const itemEl = document.createElement('div');
                 itemEl.className = 'cart-item';
                 itemEl.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}">
+                    <img src="${window.siteBaseUrl || ''}${item.image}" alt="${item.name}">
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
-                        <p class="cart-item-price">₹${item.price}</p>
+                        <p class="cart-item-price">$${item.price}</p>
                         <div class="cart-item-qty">
                             <button onclick="updateQuantity('${item.id}', -1)">-</button>
                             <span>${item.quantity}</span>
@@ -506,7 +506,7 @@
         // 3. Update sum
         const sumEl = document.getElementById('cartDrawerSum');
         if (sumEl) {
-            sumEl.textContent = '₹' + totalSum;
+            sumEl.textContent = '$' + totalSum;
         }
     }
 
@@ -583,7 +583,7 @@
         cart.forEach((item, index) => {
             const itemTotal = item.price * item.quantity;
             totalSum += itemTotal;
-            itemsText += `${index + 1}. *${item.name}* (Qty: ${item.quantity}) - ₹${itemTotal}\n`;
+            itemsText += `${index + 1}. *${item.name}* (Qty: ${item.quantity}) - $${itemTotal}\n`;
         });
         
         const text = `🛒 *New Order Request*\n\n` +
@@ -593,7 +593,7 @@
             `• *Phone:* ${phone}\n\n` +
             `📦 *Order Details*\n` +
             itemsText +
-            `\n*Total Sum:* ₹${totalSum}\n\n` +
+            `\n*Total Sum:* $${totalSum}\n\n` +
             `Please confirm my order.`;
             
         const encodedText = encodeURIComponent(text);

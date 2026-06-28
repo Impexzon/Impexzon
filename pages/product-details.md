@@ -30,7 +30,7 @@ title: Details of you product
                 <span class="pd-old-price">${{ page.original_price }}</span>
                 {% endif %}
                 {% if page.offer %}
-                <span class="pd-offer">{{ page.offer }}</span>
+                <span class="pd-offer">{{ page.offer }}% Off</span>
                 {% endif %}
             </div>
 
