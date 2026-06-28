@@ -658,10 +658,10 @@ permalink: /products/
                  data-price="{{ product.price }}" 
                  data-date="{{ product.date | date: '%s' }}">
                 
-                <a href="{{ product.url }}" class="product-details-link">
+                <a href="{{ product.url | relative_url }}" class="product-details-link">
                     <div class="product-image-wrapper">
                         {% if product.image %}
-                        <img src="{{ site.url }}{{ product.image }}" alt="{{ product.name }} – premium bakery and biscuit product" loading="lazy" decoding="async">
+                        <img src="{{ product.image | relative_url }}" alt="{{ product.name }} – premium bakery and biscuit product" loading="lazy" decoding="async">
                         {% endif %}
                     </div>
                     <div class="product-info">

@@ -336,16 +336,16 @@ layout: home
 
         <div class="pd-gallery-section">
             <div class="pd-main-image-box">
-                <img id="mainImage" src="{{ site.url }}{{ page.image }}" alt="{{ page.name }}">
+                <img id="mainImage" src="{{ page.image | relative_url }}" alt="{{ page.name }}">
             </div>
 
             {% if page.gallery %}
             <div class="pd-thumbnails">
-                <img src="{{ site.url }}{{ page.image }}" onclick="changeImage(this.src)" class="active-thumb"
+                <img src="{{ page.image | relative_url }}" onclick="changeImage(this.src)" class="active-thumb"
                     alt="Thumbnail main">
 
                 {% for item in page.gallery %}
-                <img src="{{ site.url }}{{ item.image }}" onclick="changeImage(this.src)"
+                <img src="{{ item.image | relative_url }}" onclick="changeImage(this.src)"
                     alt="Thumbnail {{ forloop.index }}">
                 {% endfor %}
             </div>

@@ -320,32 +320,24 @@ window.addEventListener('pageshow', function(event) {
         const navMenu = document.querySelector('.nav-menu');
         const hamburger = document.querySelector('.hamburger');
         
-        // CRITICAL: Force complete style reset and repaint
+        // Reset header visibility without overwriting design system
         if (header) {
-            // Force visibility styles
-            header.style.cssText = `
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                position: fixed !important;
-                top: 0 !important;
-                width: 100% !important;
-                z-index: 1000 !important;
-            `;
+            header.style.visibility = 'visible';
+            header.style.opacity = '1';
         }
         
-        // Force nav links to be visible
+        // Ensure nav links are visible without forcing inline colors
         navLinks.forEach(link => {
-            link.style.cssText = `
-                color: var(--primary-nav-color) !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                display: block !important;
-            `;
+            link.style.visibility = 'visible';
+            link.style.opacity = '1';
+            // Clear any inline styles that might override the stylesheet
+            link.style.color = '';
+            link.style.display = '';
+            link.style.textDecoration = '';
         });
         
         // Ensure mobile menu is closed
-        if (navMenu && navMenu.classList.contains('active')) {
+        if (navMenu) {
             navMenu.classList.remove('active');
         }
         
@@ -389,71 +381,6 @@ if (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chr
         }
     });
 }
-
-// Listen for pageshow event (triggers on back/forward navigation)
-window.addEventListener('pageshow', function(event) {
-    // This fires when page is loaded from back/forward cache
-    if (event.persisted) {
-        console.log('Back/Forward navigation detected - fixing all styles');
-        
-        const header = document.querySelector('.header');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const navMenu = document.querySelector('.nav-menu');
-        const hamburger = document.querySelector('.hamburger');
-        
-        // CRITICAL: Force complete style reset and repaint
-        if (header) {
-            header.style.cssText = `
-                display: block !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                position: fixed !important;
-                top: 0 !important;
-                width: 100% !important;
-                z-index: 1000 !important;
-            `;
-        }
-        
-        // Force nav links to be visible with proper hover states
-        navLinks.forEach(link => {
-            link.style.cssText = `
-                color: var(--primary-nav-color) !important;
-                visibility: visible !important;
-                opacity: 1 !important;
-                display: block !important;
-                text-decoration: none !important;
-            `;
-            
-            // Re-apply hover event listeners
-            link.onmouseenter = function() {
-                this.style.color = 'var(--active-nav-color) !important';
-            };
-            link.onmouseleave = function() {
-                this.style.color = 'var(--primary-nav-color) !important';
-            };
-        });
-        
-        // CRITICAL: Ensure mobile menu is properly closed and styled
-        if (navMenu) {
-            navMenu.classList.remove('active');
-            navMenu.style.background = 'transparent !important';
-            navMenu.style.backdropFilter = 'none !important';
-        }
-        
-        if (hamburger && hamburger.classList.contains('active')) {
-            hamburger.classList.remove('active');
-        }
-        
-        // Add a class to body for CSS targeting
-        document.body.classList.add('pageshow');
-        
-        // Remove the class after styles are reapplied
-        setTimeout(() => {
-            document.body.classList.remove('pageshow');
-        }, 500); // Increased timeout for better styling application
-    }
-
-});
 
 // CSS styles moved to main.css and header.html to prevent flickering and overrides.
 
