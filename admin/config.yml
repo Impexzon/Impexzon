@@ -24,7 +24,6 @@ collections:
       - { label: "Price", name: "price", widget: "number", value_type: "float" }
       - { label: "Original Price", name: "original_price", widget: "number", value_type: "float", required: false }
       - { label: "Offer/Discount", name: "offer", widget: "string", required: false }
-      - { label: "Featured Product", name: "featured", widget: "boolean", default: false }
       - { label: "Main Image", name: "image", widget: "image" }
       - label: "Gallery Images"
         name: "gallery"
@@ -39,7 +38,7 @@ collections:
         fields:
           - { label: "Net Weight", name: "net_weight", widget: "string" }
           - { label: "Ingredients", name: "ingredients", widget: "text" }
-          - { label: "Shelf Life", name: "shelf_life", widget: "string" }
+          - { label: "Shelf Life", name: "shelf_life", widget: "string", required: false }
           - { label: "Allergen Info", name: "allergen_info", widget: "string", required: false }
           - { label: "Nutritional Info", name: "nutritional_info", widget: "text", required: false }
       - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
