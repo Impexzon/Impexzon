@@ -533,14 +533,42 @@
 
         const auth = window.firebaseAuthInstance;
         if (!auth) {
-            alert("Auth system is still loading. Please try again in a moment.");
+            // Show a custom styled loading alert
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'auth-alert-modal-overlay show';
+            loadingOverlay.id = 'tempAuthLoadingModal';
+            loadingOverlay.innerHTML = `
+                <div class="auth-alert-modal">
+                    <span class="close-auth-modal" onclick="document.getElementById('tempAuthLoadingModal').remove()">&times;</span>
+                    <div class="auth-alert-icon" style="color: #ffcc00; filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4));">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v6l4 2"></path>
+                        </svg>
+                    </div>
+                    <h3>System Initializing</h3>
+                    <p>The authentication system is loading. Please try again in a moment.</p>
+                </div>
+            `;
+            // Close on overlay click
+            loadingOverlay.addEventListener('click', (e) => {
+                if (e.target === loadingOverlay) {
+                    loadingOverlay.remove();
+                }
+            });
+            document.body.appendChild(loadingOverlay);
+            setTimeout(() => {
+                if (loadingOverlay.parentNode) {
+                    loadingOverlay.remove();
+                }
+            }, 3000);
             return;
         }
         
         // 1. Enforce login
         if (!auth.currentUser) {
             if (typeof showAuthAlertModal === 'function') {
-                showAuthAlertModal();
+                showAuthAlertModal('checkout');
             } else {
                 alert("Please sign in with Google to complete your checkout.");
             }

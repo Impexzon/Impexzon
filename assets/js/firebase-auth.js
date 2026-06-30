@@ -1,5 +1,13 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+const firebaseConfig = {
+    apiKey: "AIzaSyA0zgzdX-XW3txpGiGX5-CFo0BDY2AuseA",
+    authDomain: "impexzon-8d439.firebaseapp.com",
+    projectId: "impexzon-8d439",
+    storageBucket: "impexzon-8d439.firebasestorage.app",
+    messagingSenderId: "720774532012",
+    appId: "1:720774532012:web:ab3eb5377c704a18d54809",
+    measurementId: "G-7KNECLFC33"
+};
 
 // List of emails authorized to see the Admin panel link in the navigation
 // Add any Google emails you want to grant admin access to here.
@@ -60,7 +68,7 @@ function initAuthAlertModal() {
                 </svg>
             </div>
             <h3>Login Required</h3>
-            <p>Please sign in with Google to inquire about this product.</p>
+            <p class="auth-alert-description">Please sign in with Google to inquire about this product.</p>
             <button onclick="loginWithGoogleAndClose()" class="btn-google-login">
                 <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -76,13 +84,32 @@ function initAuthAlertModal() {
 
     const div = document.createElement('div');
     div.innerHTML = modalHtml;
-    document.body.appendChild(div.firstElementChild);
+    const modalEl = div.firstElementChild;
+    
+    // Close modal when clicking outside on the overlay
+    modalEl.addEventListener('click', (e) => {
+        if (e.target === modalEl) {
+            window.closeAuthAlertModal();
+        }
+    });
+
+    document.body.appendChild(modalEl);
 }
 
 // Global modal helpers
-window.showAuthAlertModal = function () {
+window.showAuthAlertModal = function (context) {
     const modal = document.getElementById('authAlertModal');
     if (modal) {
+        const descText = modal.querySelector('.auth-alert-description');
+        if (descText) {
+            if (context === 'checkout') {
+                descText.textContent = "Please sign in with Google to complete your checkout and place your order.";
+            } else if (context === 'inquiry') {
+                descText.textContent = "Please sign in with Google to inquire about this product.";
+            } else {
+                descText.textContent = "Please sign in with Google to continue.";
+            }
+        }
         modal.classList.add('show');
     }
 };

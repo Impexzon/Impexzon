@@ -2009,14 +2009,14 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 200000; /* Ensure overlay is above everything including navigation and cart drawers */
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .auth-alert-modal-overlay.show {
@@ -2025,68 +2025,81 @@ body {
 }
 
 .auth-alert-modal {
-    background-color: #121212;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 40px 30px;
+    background: rgba(18, 18, 18, 0.88);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 48px 36px;
     width: 90%;
     max-width: 420px;
     position: relative;
-    border-radius: 6px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
+    border-radius: 16px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-30px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     text-align: center;
     color: var(--text-light);
 }
 
 .auth-alert-modal-overlay.show .auth-alert-modal {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .close-auth-modal {
     position: absolute;
-    top: 15px;
+    top: 20px;
     right: 20px;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
     cursor: pointer;
-    color: #888;
-    transition: color 0.3s;
+    color: #aaa;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     line-height: 1;
 }
 
 .close-auth-modal:hover {
+    background: rgba(255, 255, 255, 0.15);
     color: #fff;
+    transform: rotate(90deg);
 }
 
 .auth-alert-icon {
-    color: var(--brand-color);
-    margin-bottom: 24px;
+    color: #ff3366;
+    margin-bottom: 28px;
     display: flex;
     justify-content: center;
-    animation: authPulse 2s infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.4));
+    animation: authPulse 2.5s infinite ease-in-out;
 }
 
 @keyframes authPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.06); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.4)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(255, 51, 102, 0.7)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.4)); }
 }
 
 .auth-alert-modal h3 {
     margin-top: 0;
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 2rem;
+    margin-bottom: 16px;
     color: #fff;
     font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 .auth-alert-modal p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    color: #ccc;
-    margin-bottom: 32px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 36px;
 }
 
 .btn-google-login {
@@ -2095,24 +2108,26 @@ body {
     justify-content: center;
     background-color: #fff;
     color: #111;
-    border: none;
-    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 14px 28px;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 30px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
 .btn-google-login:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+    background-color: #111;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
 }
 
 .google-icon {
@@ -2120,6 +2135,7 @@ body {
     width: 18px;
     height: 18px;
 }
+
 
 /* Responsive adjust for mobile screen */
 @media (max-width: 768px) {
