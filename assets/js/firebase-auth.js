@@ -25,17 +25,25 @@ const auth = firebase.auth();
 window.firebaseAuthInstance = auth;
 window.googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-// Custom Login function
+// Custom Login function with concurrency guard and enhanced error handling
+window.isSigningIn = false;
 window.loginWithGoogle = function () {
+    if (window.isSigningIn) {
+        console.log("Sign-in already in progress. Ignoring duplicate call.");
+        return Promise.resolve(null);
+    }
+    window.isSigningIn = true;
     return auth.signInWithPopup(window.googleAuthProvider)
         .then(result => {
             console.log("Successfully signed in:", result.user);
+            window.isSigningIn = false;
             return result.user;
         })
         .catch(error => {
+            window.isSigningIn = false;
             console.error("Sign-in error:", error);
-            // Ignore cancel popup errors to avoid annoying alerts
-            if (error.code !== 'auth/popup-closed-by-user') {
+            // Ignore cancel popup and duplicate request errors to avoid annoying alerts
+            if (error.code !== 'auth/popup-closed-by-user' && error.code !== 'auth/cancelled-popup-request') {
                 alert("Sign-in failed: " + error.message);
             }
         });
@@ -98,6 +106,7 @@ function initAuthAlertModal() {
 
 // Global modal helpers
 window.showAuthAlertModal = function (context) {
+    window.authAlertContext = context; // Save context for redirect/modal restore logic
     const modal = document.getElementById('authAlertModal');
     if (modal) {
         const descText = modal.querySelector('.auth-alert-description');
@@ -125,11 +134,25 @@ window.loginWithGoogleAndClose = function () {
     window.loginWithGoogle().then(user => {
         if (user) {
             window.closeAuthAlertModal();
-            // Automatically open inquiry modal after successful login for best UX
+            
+            // Automatically restore the correct checkout/inquiry modal after login
+            const context = window.authAlertContext;
             setTimeout(() => {
-                const inquiryModal = document.getElementById('inquiryModal');
-                if (inquiryModal) {
-                    inquiryModal.classList.add('show');
+                if (context === 'checkout') {
+                    const checkoutModal = document.getElementById('cartCheckoutModal');
+                    if (checkoutModal) {
+                        // Prefill user details in the checkout modal
+                        const checkoutName = document.getElementById('checkoutName');
+                        const checkoutEmail = document.getElementById('checkoutEmail');
+                        if (checkoutName) checkoutName.value = user.displayName || 'Guest User';
+                        if (checkoutEmail) checkoutEmail.value = user.email || '';
+                        checkoutModal.classList.add('show');
+                    }
+                } else {
+                    const inquiryModal = document.getElementById('inquiryModal');
+                    if (inquiryModal) {
+                        inquiryModal.classList.add('show');
+                    }
                 }
             }, 400);
         }
@@ -195,6 +218,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (user) {
             // State: LOGGED IN
             if (loginBtn) loginBtn.style.display = 'none';
+            
+            // Safely auto-close auth alert modal on successful sign-in
+            if (typeof window.closeAuthAlertModal === 'function') {
+                window.closeAuthAlertModal();
+            }
 
             // Populate profile info
             if (userAvatar) {
