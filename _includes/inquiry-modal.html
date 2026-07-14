@@ -30,6 +30,8 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         transform: translateY(-20px);
         transition: transform 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
     .inquiry-modal-overlay.show .inquiry-modal {
@@ -280,7 +282,7 @@
         const encodedText = encodeURIComponent(text);
 
         if (channel === 'telegram') {
-            const adminTelegramUsername = "{{ site.telegram_username | default: 'Rinshad_py' }}";
+            const adminTelegramUsername = "{{ site.telegram_username | default: 'Rinshad_py' }}".replace(/^@/, '');
             const telegramUrl = `https://t.me/${adminTelegramUsername}?text=${encodedText}`;
             window.open(telegramUrl, '_blank');
         } else if (channel === 'whatsapp') {

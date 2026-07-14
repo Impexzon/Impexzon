@@ -98,6 +98,9 @@ permalink: /products/
         font-weight: 500;
         letter-spacing: 1px;
         transition: all 0.3s ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230c0806' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 15px center;
@@ -708,6 +711,7 @@ permalink: /products/
                          </svg>
                      </div>
                  </div>
+        </a>
         <!-- WhatsApp Floating Button end -->
 
 {% include inquiry-modal.html %}

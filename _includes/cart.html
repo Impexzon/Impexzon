@@ -270,6 +270,8 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         transform: translateY(-20px);
         transition: transform 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
     .inquiry-modal-overlay.show .inquiry-modal {
@@ -407,10 +409,46 @@
 </div>
 
 <script>
-    let cart = JSON.parse(localStorage.getItem('impexzon_cart')) || [];
+    let currentCartKey = 'impexzon_cart';
+    let cart = JSON.parse(localStorage.getItem(currentCartKey)) || [];
+
+    // Global hook to sync cart based on Firebase Auth user email
+    window.syncUserCart = function(email) {
+        const previousCart = [...cart];
+        const previousKey = currentCartKey;
+
+        if (email) {
+            // Logged in: use user-specific cart key
+            const newKey = 'impexzon_cart_' + email.replace(/[^a-zA-Z0-9]/g, '_');
+            const savedUserCart = JSON.parse(localStorage.getItem(newKey)) || [];
+
+            // If we transitioned from guest cart and it had items, merge them
+            if (previousKey === 'impexzon_cart' && previousCart.length > 0) {
+                previousCart.forEach(guestItem => {
+                    const existing = savedUserCart.find(item => item.id === guestItem.id);
+                    if (existing) {
+                        existing.quantity += guestItem.quantity;
+                    } else {
+                        savedUserCart.push(guestItem);
+                    }
+                });
+                // Clear guest cart
+                localStorage.removeItem('impexzon_cart');
+            }
+
+            currentCartKey = newKey;
+            cart = savedUserCart;
+        } else {
+            // Logged out: return to guest cart key
+            currentCartKey = 'impexzon_cart';
+            cart = JSON.parse(localStorage.getItem(currentCartKey)) || [];
+        }
+
+        saveCart();
+    };
 
     function saveCart() {
-        localStorage.setItem('impexzon_cart', JSON.stringify(cart));
+        localStorage.setItem(currentCartKey, JSON.stringify(cart));
         updateCartUI();
     }
 
@@ -627,7 +665,7 @@
         const encodedText = encodeURIComponent(text);
         
         if (channel === 'telegram') {
-            const adminTelegramUsername = "{{ site.telegram_username | default: 'Rinshad_py' }}";
+            const adminTelegramUsername = "{{ site.telegram_username | default: 'Rinshad_py' }}".replace(/^@/, '');
             const telegramUrl = `https://t.me/${adminTelegramUsername}?text=${encodedText}`;
             window.open(telegramUrl, '_blank');
         } else if (channel === 'whatsapp') {
@@ -644,7 +682,12 @@
 
     // Initialize triggers
     document.addEventListener('DOMContentLoaded', () => {
-        updateCartUI();
+        const auth = window.firebaseAuthInstance || (window.firebase && window.firebase.auth && window.firebase.auth());
+        if (auth && auth.currentUser) {
+            window.syncUserCart(auth.currentUser.email);
+        } else {
+            updateCartUI();
+        }
         
         const navCartBtn = document.getElementById('navCartBtn');
         const headerCartBtn = document.getElementById('headerCartBtn');

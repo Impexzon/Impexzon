@@ -219,6 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // State: LOGGED IN
             if (loginBtn) loginBtn.style.display = 'none';
             
+            // Sync user cart
+            if (typeof window.syncUserCart === 'function') {
+                window.syncUserCart(user.email);
+            }
+            
             // Safely auto-close auth alert modal on successful sign-in
             if (typeof window.closeAuthAlertModal === 'function') {
                 window.closeAuthAlertModal();
@@ -272,6 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // State: LOGGED OUT
             if (userProfile) userProfile.style.display = 'none';
             if (loginBtn) loginBtn.style.display = 'inline-flex';
+            
+            // Sync user cart (reverts to guest cart)
+            if (typeof window.syncUserCart === 'function') {
+                window.syncUserCart(null);
+            }
 
             // Update drawer elements
             if (drawerSignInText) drawerSignInText.textContent = 'SIGN IN';

@@ -352,7 +352,7 @@ description: Get in touch with Impexzon for wholesale biscuit orders, bulk distr
         </div>
         <h3>Telegram</h3>
         <p>Connect with our B2B commercial advisors and local wholesale coordinators.</p>
-        <a href="https://t.me/{{ site.telegram_username }}" target="_blank" class="btn-channel-action">Connect Now</a>
+        <a href="https://t.me/{{ site.telegram_username | remove: "@" }}" target="_blank" class="btn-channel-action">Connect Now</a>
       </div>
 
       <!-- Email -->
