@@ -12,9 +12,8 @@ const firebaseConfig = {
 // List of emails authorized to see the Admin panel link in the navigation
 // Add any Google emails you want to grant admin access to here.
 const ADMIN_EMAILS = [
-    '',
-    '',
-    ''
+    'payball.khan@gmail.com',
+    'freelancer.rinshad@gmail.com'
 ];
 
 // Initialize Firebase compatibility SDK

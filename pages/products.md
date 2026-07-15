@@ -700,7 +700,7 @@ permalink: /products/
 
 <!-- WhatsApp Floating Button -->
 
-        <a href="" 
+        <a href="https://wa.me/{{ site.whatsapp_number }}" 
                 target="_blank" 
                 class="whatsapp-float"
                 aria-label="Contact us on WhatsApp">
