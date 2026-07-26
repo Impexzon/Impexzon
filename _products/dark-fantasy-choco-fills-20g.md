@@ -31,4 +31,14 @@ specifications:
     Saturated Fat	12.7 g
 date: 2026-07-26
 ---
-sdsadasdasddsds
+**Net Weight:** 20 g
+
+**Brand:** Sunfeast
+
+**Category:** Premium Chocolate Filled Biscuits
+
+**Country of Origin:** India
+
+**Storage Instructions:** Store in a cool, dry place away from direct sunlight. Keep the pack tightly sealed after opening.
+
+**Ideal For:** Supermarkets, convenience stores, cafés, vending machines, schools, offices, wholesalers, and retail shops.
