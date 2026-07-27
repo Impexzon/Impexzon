@@ -7,7 +7,7 @@ description: >-
 
   ORIGINAL SKIN PROTECTING JELLY + WITH PURE PETROLEUM JELLY. TRIPLE PURIFICATION: PURITY GUARANTEED. PERFUMED PETROLEUM JELLY.
 price: 0.5
-image: /assets/images/uploads/vaseline1.jpeg
+image: /assets/images/uploads/vaseline2.jpeg
 specifications:
   net_weight: 12 gm
   ingredients: >-
