@@ -386,13 +386,26 @@
         <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
         <h3>Checkout Order</h3>
         <form id="cartCheckoutForm" onsubmit="submitCheckout(event)">
+            <!-- Optional Google Login option inside checkout modal when user is logged out -->
+            <div id="checkoutGoogleLoginOption" style="display: none; margin-bottom: 20px; text-align: center; padding: 12px; background-color: #FAF4F0; border: 1px dashed #EADFD7; border-radius: 4px;">
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.85rem; margin-bottom: 8px; color: #555;">Want to auto-fill? Sign in with Google:</p>
+                <button type="button" onclick="loginWithGoogleInCheckoutModal()" class="btn-google-login" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: auto; padding: 8px 16px; background-color: #ffffff; border: 1.5px solid #0c0806; color: #0c0806; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; border-radius: 4px; transition: all 0.2s;">
+                    <svg class="google-icon" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                    <span>Sign in with Google</span>
+                </button>
+            </div>
             <div class="form-group">
                 <label for="checkoutName">Name</label>
-                <input type="text" id="checkoutName" placeholder="Name" readonly>
+                <input type="text" id="checkoutName" placeholder="Name">
             </div>
             <div class="form-group">
                 <label for="checkoutEmail">Email</label>
-                <input type="email" id="checkoutEmail" placeholder="Email" readonly>
+                <input type="email" id="checkoutEmail" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="checkoutPhone">Mobile Number</label>
@@ -569,60 +582,67 @@
             return;
         }
 
-        const auth = window.firebaseAuthInstance;
-        if (!auth) {
-            // Show a custom styled loading alert
-            const loadingOverlay = document.createElement('div');
-            loadingOverlay.className = 'auth-alert-modal-overlay show';
-            loadingOverlay.id = 'tempAuthLoadingModal';
-            loadingOverlay.innerHTML = `
-                <div class="auth-alert-modal">
-                    <span class="close-auth-modal" onclick="document.getElementById('tempAuthLoadingModal').remove()">&times;</span>
-                    <div class="auth-alert-icon" style="color: #ffcc00; filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.4));">
-                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 6v6l4 2"></path>
-                        </svg>
-                    </div>
-                    <h3>System Initializing</h3>
-                    <p>The authentication system is loading. Please try again in a moment.</p>
-                </div>
-            `;
-            // Close on overlay click
-            loadingOverlay.addEventListener('click', (e) => {
-                if (e.target === loadingOverlay) {
-                    loadingOverlay.remove();
-                }
-            });
-            document.body.appendChild(loadingOverlay);
-            setTimeout(() => {
-                if (loadingOverlay.parentNode) {
-                    loadingOverlay.remove();
-                }
-            }, 3000);
-            return;
-        }
+        const auth = window.firebaseAuthInstance || (window.firebase && window.firebase.auth && window.firebase.auth());
+        const user = auth ? auth.currentUser : null;
         
-        // 1. Enforce login
-        if (!auth.currentUser) {
-            if (typeof showAuthAlertModal === 'function') {
-                showAuthAlertModal('checkout');
-            } else {
-                alert("Please sign in with Google to complete your checkout.");
-            }
-            return;
-        }
-        
-        // 2. Set channel
+        // Set channel
         document.getElementById('checkoutChannel').value = channel;
         
-        // 3. Prefill name & email
-        document.getElementById('checkoutName').value = auth.currentUser.displayName || 'Guest User';
-        document.getElementById('checkoutEmail').value = auth.currentUser.email || '';
+        const checkoutName = document.getElementById('checkoutName');
+        const checkoutEmail = document.getElementById('checkoutEmail');
+        const googleOption = document.getElementById('checkoutGoogleLoginOption');
+
+        // Prefill name & email if logged in, or unlock fields if not
+        if (user) {
+            if (checkoutName) {
+                checkoutName.value = user.displayName || '';
+                checkoutName.readOnly = true;
+            }
+            if (checkoutEmail) {
+                checkoutEmail.value = user.email || '';
+                checkoutEmail.readOnly = true;
+            }
+            if (googleOption) googleOption.style.display = 'none';
+        } else {
+            if (checkoutName) {
+                if (checkoutName.readOnly) {
+                    checkoutName.value = '';
+                    checkoutName.readOnly = false;
+                }
+            }
+            if (checkoutEmail) {
+                if (checkoutEmail.readOnly) {
+                    checkoutEmail.value = '';
+                    checkoutEmail.readOnly = false;
+                }
+            }
+            if (googleOption) googleOption.style.display = 'block';
+        }
         
-        // 4. Close cart drawer and open checkout details modal
+        // Close cart drawer and open checkout details modal
         closeCart();
         document.getElementById('cartCheckoutModal').classList.add('show');
+    }
+
+    function loginWithGoogleInCheckoutModal() {
+        if (typeof window.loginWithGoogle === 'function') {
+            window.loginWithGoogle().then(user => {
+                if (user) {
+                    const checkoutName = document.getElementById('checkoutName');
+                    const checkoutEmail = document.getElementById('checkoutEmail');
+                    if (checkoutName) {
+                        checkoutName.value = user.displayName || '';
+                        checkoutName.readOnly = true;
+                    }
+                    if (checkoutEmail) {
+                        checkoutEmail.value = user.email || '';
+                        checkoutEmail.readOnly = true;
+                    }
+                    const googleOption = document.getElementById('checkoutGoogleLoginOption');
+                    if (googleOption) googleOption.style.display = 'none';
+                }
+            });
+        }
     }
 
     function closeCheckoutModal() {

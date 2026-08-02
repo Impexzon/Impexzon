@@ -265,6 +265,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 inquireEmail.value = user.email || '';
                 inquireEmail.readOnly = true;
             }
+            const googleOption = document.getElementById('modalGoogleLoginOption');
+            if (googleOption) {
+                googleOption.style.display = 'none';
+            }
+
+            // Auto-fill Checkout Form Name/Email fields if present on this page
+            const checkoutName = document.getElementById('checkoutName');
+            const checkoutEmail = document.getElementById('checkoutEmail');
+            if (checkoutName) {
+                checkoutName.value = user.displayName || '';
+                checkoutName.readOnly = true;
+            }
+            if (checkoutEmail) {
+                checkoutEmail.value = user.email || '';
+                checkoutEmail.readOnly = true;
+            }
+            const checkoutGoogleOption = document.getElementById('checkoutGoogleLoginOption');
+            if (checkoutGoogleOption) {
+                checkoutGoogleOption.style.display = 'none';
+            }
 
             // Check if user is Admin and toggle the admin navigation link visibility
             const adminItems = document.querySelectorAll('.admin-nav-item');
@@ -297,6 +317,26 @@ document.addEventListener('DOMContentLoaded', () => {
             if (inquireEmail) {
                 inquireEmail.value = '';
                 inquireEmail.readOnly = false;
+            }
+            const googleOption = document.getElementById('modalGoogleLoginOption');
+            if (googleOption) {
+                googleOption.style.display = 'block';
+            }
+
+            // Clear and unlock Checkout Form fields
+            const checkoutName = document.getElementById('checkoutName');
+            const checkoutEmail = document.getElementById('checkoutEmail');
+            if (checkoutName) {
+                checkoutName.value = '';
+                checkoutName.readOnly = false;
+            }
+            if (checkoutEmail) {
+                checkoutEmail.value = '';
+                checkoutEmail.readOnly = false;
+            }
+            const checkoutGoogleOption = document.getElementById('checkoutGoogleLoginOption');
+            if (checkoutGoogleOption) {
+                checkoutGoogleOption.style.display = 'block';
             }
 
             // Hide admin navigation links
