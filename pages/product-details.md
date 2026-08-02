@@ -49,7 +49,7 @@ title: Details of you product
                 </ul>
             </div>
 
-            <a href="/contact" class="pd-buy-btn">Enquire / Buy Now</a>
+            <a href="/contact" class="pd-buy-btn">Enquire Now</a>
         </div>
     </div>
 </div>
